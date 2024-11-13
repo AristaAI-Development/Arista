@@ -10,14 +10,16 @@ repository = "https://github.com/gabotechs/MusicGPT"
 authors = ["gb.mt.me@gmail.com"]
 
 [dependencies]
-openssl = { version = "0.10.59", features = ["vendored"] } # NOTE: neeeded for cross compilations
+openssl = { version = "0.10.59", features = [
+    "vendored",
+] } # NOTE: neeeded for cross compilations
 clap = { version = "4.5.4", features = ["derive"] }
 tokenizers = "0.19.1"
 ndarray = "0.15.6"
 num-traits = "0.2.18"
 log = "0.4.21"
 rand = "0.8.5"
-hound = "3.5.1"
+hound = { git = "https://github.com/rubeniskov/hound.git", branch = "fix-channel-mask-mono-speaker" }
 tokio = { version = "1.37.0", features = ["full"] }
 indicatif = "0.17.8"
 directories = "5.0"
@@ -30,7 +32,11 @@ ort = { version = "2.0.0-rc.2", features = ["half"] }
 half = { version = "2.4.1", features = ["num-traits"] }
 lazy_static = "1.4.0"
 tracing = "0.1.40"
-tracing-subscriber = { version = "0.3.18", features = ["env-filter", "fmt", "time"] }
+tracing-subscriber = { version = "0.3.18", features = [
+    "env-filter",
+    "fmt",
+    "time",
+] }
 async-trait = "0.1.80"
 anyhow = "1.0.83"
 uuid = { version = "1.8.0", features = ["v4", "serde"] }
@@ -42,9 +48,14 @@ hostname = "0.4.0"
 # Web UI deps, potentially hide behind a flag
 tokio-util = "0.7.11"
 tokio-tungstenite = "0.21.0"
-specta = { version = "1.0.5", features = ["uuid", "serde", "typescript", "export"] }
+specta = { version = "1.0.5", features = [
+    "uuid",
+    "serde",
+    "typescript",
+    "export",
+] }
 axum = { version = "0.7.5", features = ["ws"] }
-tower-http = { version = "0.5.2" , features = ["fs"]}
+tower-http = { version = "0.5.2", features = ["fs"] }
 open = "5.1.2"
 chrono = "0.4.38"
 scopeguard = "1.2.0"
@@ -55,4 +66,3 @@ default = []
 coreml = ["ort/coreml"]
 tensorrt = ["ort/tensorrt"]
 cuda = ["ort/cuda"]
-
