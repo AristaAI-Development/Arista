@@ -1,70 +1,60 @@
 <h1 align="center">
-    <span> MusicGPT</span>
-    <img height="30" src="assets/music-icon.svg" alt="Signway logo"/>
+    <span>Arista AI</span>
+    <img height="30" src="https://pbs.twimg.com/profile_banners/1870565954180055040/1734813022/1500x500" alt="Arista logo"/>
 </h1>
 
 <p align="center">
-    Generate music based on natural language prompts using LLMs running locally.
+    Transforming ideas into music with the power of AI. Experience next-gen music creation and tokenization.
 </p>
 
-
-https://github.com/gabotechs/MusicGPT/assets/45515538/f0276e7c-70e5-42fc-817a-4d9ee9095b4c
-<p align="end">
-☝️ Turn up the volume!
+<p align="center">
+    <a href="https://aristalabs.org">Website</a> | <a href="https://x.com/AristaLab">Twitter</a>
 </p>
-
 
 # Overview
 
-MusicGPT is an application that allows running the latest music generation
-AI models locally in a performant way, in any platform and without installing heavy dependencies
-like Python or machine learning frameworks.
+Arista is an AI-driven platform for music creation, offering innovative tools to generate music effortlessly using natural language prompts. With support for advanced models like MusicGen, Arista allows you to create, customize, and monetize music, all on a decentralized framework.
 
-Right now it only supports [MusicGen by Meta](https://audiocraft.metademolab.com/musicgen.html),
-but the plan is to support different music generation models transparently to the user.
+### Key Features:
+- **Text-to-Music**: Create music with simple text descriptions.
+- **Real-Time Generation**: Instant music creation powered by AI.
+- **Style Transfer**: Apply different musical styles to your tracks.
+- **Infinite Music**: Generate endless, non-repeating music streams.
+- **Tokenized Music Economy**: Monetize and share your music with blockchain transparency.
 
-The main milestones for the project are:
-- [x] Text conditioned music generation
-- [ ] Melody conditioned music generation
-- [ ] Indeterminately long / infinite music streams
+# Installation
 
-# Install
+## Mac and Linux
 
-### Mac and Linux
-
-MusicGPT can be installed on Mac and Linux using `brew`:
+Install Arista AI tools using `brew`:
 
 ```shell
-brew install gabotechs/taps/musicgpt
+brew install gabotechs/taps/arista
 ```
 
-Or by directly downloading the precompiled binaries
-from [this link](https://github.com/gabotechs/MusicGPT/releases/latest)
+Or download the precompiled binaries directly from [our latest release](https://github.com/gabotechs/MusicGPT/releases/latest).
 
-### Windows
+## Windows
 
-On Windows, the executable file can be downloaded
-from [this link](https://github.com/gabotechs/MusicGPT/releases/latest/download/x86_64-pc-windows-msvc.tar.gz).
+Download the Windows executable from [this link](https://github.com/gabotechs/MusicGPT/releases/latest/download/x86_64-pc-windows-msvc.tar.gz).
 
-### Docker (Recommend for running with CUDA)
+## Docker (Recommended for CUDA-enabled GPUs)
 
-If you want to run MusicGPT with a CUDA enabled GPU, this is the best way, as you only need to have [the basic
-NVIDIA drivers](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) installed in your system.
+For systems with CUDA-enabled GPUs, use Docker for optimal performance:
 
 ```shell
 docker pull gabotechs/musicgpt
 ```
 
-Once the image is downloaded, you can run it with:
+Run the image with:
 
 ```shell
 docker run -it --gpus all -p 8642:8642 -v ~/.musicgpt:/root/.local/share/musicgpt gabotechs/musicgpt --gpu --ui-expose
 ```
 
-### With cargo
+## Using Rust Cargo
 
-If you have the [Rust toolchain](https://www.rust-lang.org/tools/install) installed in your system, you can install it
-with `cargo`.
+Install with the Rust toolchain:
 
 ```shell
 cargo install musicgpt
@@ -72,114 +62,61 @@ cargo install musicgpt
 
 # Usage
 
-There are two ways of interacting with MusicGPT: the UI mode and the CLI mode.
+### UI Mode
 
-## UI mode
+Access Arista’s intuitive chat-like interface for generating music. This mode enables:
+- Chat history for easy reference.
+- Playback of generated music samples.
+- Background generation for efficiency.
+- Cross-device usage through web access.
 
-This mode will display a chat-like web application for exchanging prompts with the LLM. It will:
-- store your chat history 
-- allow you to play the generated music samples whenever you want
-- generate music samples in the background
-- allow you to use the UI in a device different from the one executing the LLMs
-
-You can run the UI by just executing the following command:
+Start the UI with:
 
 ```shell
-musicgpt
+arista
 ```
 
-You can also choose different models for running inference, and whether to use a GPU or not, for example:
+For GPU support and advanced models:
 
 ```shell
-musicgpt --gpu --model medium
+arista --gpu --model medium
 ```
 
-> [!WARNING]  
-> Most models require really powerful hardware for running inference
-
-If you want to use a CUDA enabled GPU, it's recommended that you run MusicGPT with Docker:
+Run with Docker for GPU optimization:
 
 ```shell
 docker run -it --gpus all -p 8642:8642 -v ~/.musicgpt:/root/.local/share/musicgpt gabotechs/musicgpt --ui-expose --gpu
 ```
 
-## CLI mode
+### CLI Mode
 
-This mode will generate and play music directly in the terminal, allowing you to provide multiple
-prompts and playing audio as soon as it's generated. You can generate audio based on a prompt with
-the following command:
+Generate music directly in the terminal with text prompts:
 
 ```shell
-musicgpt "Create a relaxing LoFi song"
+arista "Create a relaxing LoFi song"
 ```
 
-By default, it produces a sample of 10s, which can be configured up to 30s:
+Set the duration of the audio:
 
 ```shell
-musicgpt "Create a relaxing LoFi song" --secs 30
+arista "Create a relaxing LoFi song" --secs 30
 ```
 
-There's multiple models available, it will use the smallest one by default, but
-you can opt into a bigger model:
+Choose different AI models for inference:
 
 ```shell
-musicgpt "Create a relaxing LoFi song" --model medium
+arista "Create a relaxing LoFi song" --model medium
 ```
 
-> [!WARNING]  
-> Most models require really powerful hardware for running inference
-
-If you want to use a CUDA enabled GPU, it's recommended that you run MusicGPT with Docker:
+Review all available options with:
 
 ```shell
-docker run -it --gpus all -v ~/.musicgpt:/root/.local/share/musicgpt gabotechs/musicgpt --gpu "Create a relaxing LoFi song"
-```
-
-You can review all the options available running:
-
-```shell
-musicgpt --help
+arista --help
 ```
 
 # Benchmarks
 
-The following graph shows the inference time taken for generating 10 seconds of audio using
-different models on a Mac M1 Pro. For comparison, it's Python equivalent using https://github.com/huggingface/transformers
-is shown. 
-
-The command used for generating the 10 seconds of audio was:
-
- 
-```shell
-musicgpt '80s pop track with bassy drums and synth'
-```
-
-<details>
-<summary>This is the Python script used for generating the 10 seconds of audio</summary>
-
-```python
-import scipy
-import time
-from transformers import AutoProcessor, MusicgenForConditionalGeneration
-
-processor = AutoProcessor.from_pretrained("facebook/musicgen-small")
-model = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small")
-
-inputs = processor(
-    text=["80s pop track with bassy drums and synth"],
-    padding=True,
-    return_tensors="pt",
-)
-
-start = time.time()
-audio_values = model.generate(**inputs, max_new_tokens=500)
-print(time.time() - start) # Log time taken in generation
-
-sampling_rate = model.config.audio_encoder.sampling_rate
-scipy.io.wavfile.write("musicgen_out.wav", rate=sampling_rate, data=audio_values[0, 0].numpy())
-```
-
-</details>
+Performance comparison for generating 10 seconds of audio using different models on Mac M1 Pro:
 
 <p align="center">
 <img height=400 src="https://github.com/gabotechs/MusicGPT/assets/45515538/edae3c25-04e3-41c3-a2b5-c0829fa69ee3"/>
@@ -187,22 +124,17 @@ scipy.io.wavfile.write("musicgen_out.wav", rate=sampling_rate, data=audio_values
 
 # Storage
 
-MusicGPT needs access to your storage in order to save downloaded models and generated audios along with some
-metadata needed for the application to work properly. Assuming your username is `foo`, it will store the data
-in the following locations:
+Arista saves data (models, audio, metadata) in the following locations:
 
-- Windows: `C:\Users\foo\AppData\Roaming\gabotechs\musicgpt`
-- MacOS: `/Users/foo/Library/Application\ Support/com.gabotechs.musicgpt`
-- Linux: `/home/foo/.config/musicgpt`
+- **Windows**: `C:\Users\<username>\AppData\Roaming\gabotechs\arista`
+- **MacOS**: `/Users/<username>/Library/Application\ Support/com.gabotechs.arista`
+- **Linux**: `/home/<username>/.config/arista`
 
 # License
 
-The code is licensed under a [MIT License](./LICENSE), but the AI model weights that get downloaded
-at application startup are licensed under the [CC-BY-NC-4.0 License](https://spdx.org/licenses/CC-BY-NC-4.0)
-as they are generated based on the following repositories:
+The code is licensed under [MIT License](./LICENSE). Model weights downloaded by the application are licensed under [CC-BY-NC-4.0 License](https://spdx.org/licenses/CC-BY-NC-4.0), referencing the following repositories:
 
 - https://huggingface.co/facebook/musicgen-small
 - https://huggingface.co/facebook/musicgen-medium
 - https://huggingface.co/facebook/musicgen-large
 - https://huggingface.co/facebook/musicgen-melody
-
